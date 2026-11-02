@@ -722,23 +722,23 @@ Provide a concise engineering answer.
 
         try:
 
-        client = InferenceClient(
-            api_key=st.secrets["HF_TOKEN"],
-            provider="auto"
-        )
-        
-        response = client.chat.completions.create(
-            model=MODEL,
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ],
-            max_tokens=500
-        )
-        
-        answer = response.choices[0].message.content
+            client = InferenceClient(
+                api_key=st.secrets["HF_TOKEN"],
+                provider="auto"
+            )
+            
+            response = client.chat.completions.create(
+                model=MODEL,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                max_tokens=500
+            )
+            
+            answer = response.choices[0].message.content
 
         except Exception as error:
 
