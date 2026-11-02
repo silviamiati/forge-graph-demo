@@ -1,0 +1,6 @@
+component,maintenance_action,duration_hours,cost_eur,operational_impact
+High Pressure Compressor,HPC Inspection,8,4000,LOW
+High Pressure Compressor,HPC Repair,36,35000,MEDIUM
+High Pressure Compressor,HPC Replacement,72,85000,HIGH
+Fan,Fan Inspection,6,3000,LOW
+Fan,Fan Replacement,48,55000,HIGH
