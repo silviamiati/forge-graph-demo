@@ -2,4 +2,4 @@ streamlit
 pandas
 networkx
 matplotlib
-ollama
+huggingface_hub
