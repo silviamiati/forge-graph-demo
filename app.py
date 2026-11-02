@@ -23,6 +23,59 @@ st.caption(
     "Ontology-driven GraphRAG demonstrator using NASA C-MAPSS data"
 )
 
+with st.expander(
+    "ℹ️ About this demonstrator",
+    expanded=False
+):
+
+    st.markdown("""
+This application is a **technology demonstrator developed to illustrate how the FORGE concept could work**.
+
+It does **not contain or process company, project, vessel, customer or operational data**.
+
+The demonstrator reproduces, on a small public dataset, the main logical flow envisioned for FORGE:
+
+**Data → Analytics → Ontology → Knowledge Graph → Graph Retrieval → Generative AI**
+
+### Data used
+
+- **`train_FD001.txt`**  
+  Public NASA C-MAPSS turbofan engine degradation data.  
+  The demo uses sensor measurements from Engine 01 to identify a persistent deviation from its initial operating baseline.
+
+- **`maintenance.csv`**  
+  A **synthetic dataset created exclusively for this demonstrator** containing illustrative maintenance actions, duration, cost and operational-impact values.
+
+- **`ontology.py`**  
+  A simplified domain ontology defining the entities and relationships allowed in the Knowledge Graph, including Asset, System, Component, Sensor, Event, Failure Mode, Risk and Maintenance Action.
+
+The detected event is connected to domain knowledge through the Knowledge Graph.
+
+The Generative AI does **not analyse the complete raw dataset directly**.  
+It receives the relevant knowledge retrieved from the graph and uses this context to formulate a natural-language answer.
+
+### Example questions
+
+Try asking:
+
+- **What is happening to Engine 01?**
+- **What evidence is available for HPC degradation?**
+- **What are the potential consequences for Engine 01?**
+- **What maintenance options are available for Engine 01?**
+- **Which maintenance option is the fastest?**
+- **How much does HPC replacement cost?**
+- **Explain why Engine 01 requires attention and summarize the available mitigation options.**
+- **Who manufactured Engine 01?**
+
+The last question is intentionally useful for testing **grounding**: manufacturer information is not contained in the Knowledge Graph, so the expected behaviour is for the system to state that the information is not available.
+
+### Purpose
+
+The purpose of this demonstrator is to show how **heterogeneous data can be transformed into connected knowledge**, and how Generative AI can use that knowledge to provide **contextual and explainable answers**.
+
+The same architectural concept could later be applied to FORGE data sources and use cases.
+""")
+
 
 # ============================================================
 # CONFIG
