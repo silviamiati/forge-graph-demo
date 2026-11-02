@@ -2,7 +2,7 @@ import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 import streamlit as st
-import ollama
+from huggingface_hub import InferenceClient
 
 from ontology import validate_class, validate_relation
 
@@ -31,7 +31,7 @@ st.caption(
 NASA_FILE = "train_FD001.txt"
 MAINTENANCE_FILE = "maintenance.csv"
 
-MODEL = "llama3.2:3b"
+MODEL = "meta-llama/Llama-3.1-8B-Instruct"
 
 ENGINE_ID = 1
 SENSOR = "sensor_11"
@@ -722,28 +722,28 @@ Provide a concise engineering answer.
 
         try:
 
-            response = ollama.chat(
-
-                model=MODEL,
-
-                messages=[
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ]
-            )
-
-
-            answer = (
-                response["message"]["content"]
-            )
-
+        client = InferenceClient(
+            api_key=st.secrets["HF_TOKEN"],
+            provider="auto"
+        )
+        
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            max_tokens=500
+        )
+        
+        answer = response.choices[0].message.content
 
         except Exception as error:
 
             st.error(
-                "Unable to contact the local Ollama model."
+                "Unable to contact the cloud LLM."
             )
 
             st.code(
